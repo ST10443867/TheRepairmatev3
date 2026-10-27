@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:fitsSystemWindows="true">
+
+    <ScrollView android:id="@+id/scrollView" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+        android:scrollbars="none" android:overScrollMode="never">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:paddingHorizontal="20dp" android:paddingTop="16dp" android:paddingBottom="24dp">
+
+            <!-- LOGO INJECT HERE -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView android:id="@+id/tvAvatar" android:layout_width="48dp" android:layout_height="48dp"
+                    android:gravity="center" android:background="@drawable/bg_circle_grad" android:text="R"
+                    android:textColor="@color/qf_white" android:textStyle="bold" android:textSize="20sp" />
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:orientation="vertical" android:layout_marginStart="12dp">
+                    <TextView android:id="@+id/tvGreeting" style="@style/Body" android:text="Welcome" />
+                    <TextView android:id="@+id/tvName" style="@style/Heading" android:textSize="22sp" android:text="…" />
+                </LinearLayout>
+                <TextView style="@style/Body" android:text="QuickFix" android:textColor="@color/qf_white"
+                    android:textStyle="bold" android:background="@drawable/bg_chip" android:paddingHorizontal="12dp" android:paddingVertical="6dp" />
+            </LinearLayout>
+
+            <!-- Hero -->
+            <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" android:background="@drawable/bg_hero" android:padding="22dp">
+
+                <LinearLayout android:id="@+id/cardActive" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:visibility="gone">
+                    <TextView style="@style/Body" android:text="ACTIVE REPAIR" android:textColor="@color/qf_text2"
+                        android:textSize="12sp" android:letterSpacing="0.12" android:textStyle="bold" />
+                    <TextView android:id="@+id/tvHeroTicket" style="@style/Heading" android:textSize="24sp" android:layout_marginTop="4dp" />
+                    <TextView android:id="@+id/tvHeroDevice" style="@style/Body" android:textColor="@color/qf_text2" android:layout_marginTop="2dp" />
+                    <TextView android:id="@+id/tvHeroStatus" style="@style/Body" android:textColor="@color/qf_white" android:textStyle="bold"
+                        android:background="@drawable/bg_chip" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:layout_marginTop="14dp" />
+                    <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/heroProgress"
+                        android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp"
+                        app:trackThickness="8dp" app:trackCornerRadius="4dp" app:trackColor="#40FFFFFF" app:indicatorColor="@color/qf_white" />
+                    <TextView android:id="@+id/tvHeroStep" style="@style/Body" android:textColor="@color/qf_text2" android:layout_marginTop="8dp" />
+                    <Button android:id="@+id/btnHeroTrack" android:layout_width="match_parent" android:layout_height="52dp"
+                        android:layout_marginTop="16dp" android:text="Track repair" android:background="@drawable/bg_pill_light"
+                        app:backgroundTint="@null" android:textColor="@color/qf_black" android:textAllCaps="false" android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/cardEmpty" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView style="@style/Heading" android:text="Something broken?" android:textSize="24sp" />
+                    <TextView style="@style/Body" android:textColor="@color/qf_text2" android:layout_marginTop="6dp"
+                        android:text="Get a preliminary estimate and reserve a drop-off slot with our technicians." />
+                    <Button android:id="@+id/btnHeroBook" android:layout_width="match_parent" android:layout_height="52dp"
+                        android:layout_marginTop="16dp" android:text="Book a repair" android:background="@drawable/bg_pill_light"
+                        app:backgroundTint="@null" android:textColor="@color/qf_black" android:textAllCaps="false" android:textStyle="bold" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Quick actions -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:weightSum="4" android:layout_marginTop="24dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:orientation="vertical" android:gravity="center">
+                    <com.example.therepairmate.ui.GlassIconView android:id="@+id/iconBook" android:layout_width="64dp" android:layout_height="64dp"
+                        android:contentDescription="Book a repair" app:glassIcon="@drawable/ic_add" app:glassTint="#2D7BFF" />
+                    <TextView style="@style/Body" android:text="Book" android:textColor="@color/qf_white" android:layout_marginTop="6dp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:orientation="vertical" android:gravity="center">
+                    <com.example.therepairmate.ui.GlassIconView android:id="@+id/iconRepairs" android:layout_width="64dp" android:layout_height="64dp"
+                        android:contentDescription="My repairs" app:glassIcon="@drawable/ic_list" app:glassTint="#7B3FE4" />
+                    <TextView style="@style/Body" android:text="Repairs" android:textColor="@color/qf_white" android:layout_marginTop="6dp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:orientation="vertical" android:gravity="center">
+                    <com.example.therepairmate.ui.GlassIconView android:id="@+id/iconCall" android:layout_width="64dp" android:layout_height="64dp"
+                        android:contentDescription="Call us" app:glassIcon="@drawable/ic_phone" app:glassTint="#2D7BFF" />
+                    <TextView style="@style/Body" android:text="Call us" android:textColor="@color/qf_white" android:layout_marginTop="6dp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:orientation="vertical" android:gravity="center">
+                    <com.example.therepairmate.ui.GlassIconView android:id="@+id/iconMail" android:layout_width="64dp" android:layout_height="64dp"
+                        android:contentDescription="Email us" app:glassIcon="@drawable/ic_mail" app:glassTint="#7B3FE4" />
+                    <TextView style="@style/Body" android:text="Email" android:textColor="@color/qf_white" android:layout_marginTop="6dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Services -->
+            <TextView style="@style/SectionTitle" android:text="Our services" android:layout_marginTop="28dp" />
+            <TextView style="@style/Body" android:text="Tap a service to start a booking. Prices are preliminary estimates." android:layout_marginTop="2dp" />
+            <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:scrollbars="none" android:layout_marginTop="12dp" android:overScrollMode="never">
+                <LinearLayout android:id="@+id/servicesRow" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!-- Recent repairs -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="24dp">
+                <TextView style="@style/SectionTitle" android:layout_width="0dp" android:layout_weight="1" android:text="Recent repairs" />
+                <TextView android:id="@+id/tvSeeAll" style="@style/Body" android:text="See all" android:textColor="@color/qf_blue"
+                    android:textStyle="bold" android:padding="8dp" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/recentList" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_marginTop="8dp" />
+            <TextView android:id="@+id/tvNoRecent" style="@style/Body" android:text="No repairs yet. Book your first one above."
+                android:visibility="gone" />
+
+            <!-- How it works -->
+            <TextView style="@style/SectionTitle" android:text="How it works" android:layout_marginTop="24dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp" android:layout_marginTop="10dp" android:background="@drawable/bg_glass_card">
+                <TextView style="@style/Body" android:textColor="@color/qf_white" android:textStyle="bold" android:text="1 · Describe the problem" />
+                <TextView style="@style/Body" android:text="Pick your device and issue to see a preliminary estimate." android:layout_marginBottom="12dp" />
+                <TextView style="@style/Body" android:textColor="@color/qf_white" android:textStyle="bold" android:text="2 · Choose a time slot" />
+                <TextView style="@style/Body" android:text="Reserve a weekday drop-off that suits you." android:layout_marginBottom="12dp" />
+                <TextView style="@style/Body" android:textColor="@color/qf_white" android:textStyle="bold" android:text="3 · Track it live" />
+                <TextView style="@style/Body" android:text="Follow every stage of your repair from your phone." />
+            </LinearLayout>
+
+            <!-- Support -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp" android:layout_marginTop="16dp" android:background="@drawable/bg_glass_card">
+                <TextView style="@style/SectionTitle" android:text="Need help?" />
+                <TextView style="@style/Body" android:text="Store hours: Mon–Fri · 09:00–17:00" android:layout_marginTop="4dp" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginTop="14dp" android:weightSum="3">
+                    <Button android:id="@+id/btnCall" android:layout_width="0dp" android:layout_weight="1" android:layout_height="52dp"
+                        android:layout_marginEnd="4dp" android:text="Call" android:background="@drawable/bg_button"
+                        app:backgroundTint="@null" android:textColor="@color/qf_white" android:textAllCaps="false" />
+                    <Button android:id="@+id/btnWhatsapp" android:layout_width="0dp" android:layout_weight="1" android:layout_height="52dp"
+                        android:layout_marginHorizontal="4dp" android:text="WhatsApp" android:background="@drawable/bg_button"
+                        app:backgroundTint="@null" android:textColor="@color/qf_white" android:textAllCaps="false" />
+                    <Button android:id="@+id/btnMail" android:layout_width="0dp" android:layout_weight="1" android:layout_height="52dp"
+                        android:layout_marginStart="4dp" android:text="Email" android:background="@drawable/bg_chip"
+                        app:backgroundTint="@null" android:textColor="@color/qf_white" android:textAllCaps="false" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView style="@style/Body" android:text="The Repairmate · a QuickFix Tech Solutions product"
+                android:layout_gravity="center_horizontal" android:layout_marginTop="24dp" android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom navigation -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:weightSum="4" android:padding="6dp"
+        android:layout_marginHorizontal="16dp" android:layout_marginBottom="12dp" android:background="@drawable/bg_nav">
+        <LinearLayout android:id="@+id/navHome" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:padding="8dp" android:clickable="true" android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_home"
+                app:tint="@color/qf_blue" android:importantForAccessibility="no" />
+            <TextView style="@style/Body" android:text="Home" android:textSize="11sp" android:textColor="@color/qf_blue" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navBook" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:padding="8dp" android:clickable="true" android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_add"
+                app:tint="@color/qf_muted" android:importantForAccessibility="no" />
+            <TextView style="@style/Body" android:text="Book" android:textSize="11sp" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navRepairs" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:padding="8dp" android:clickable="true" android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_list"
+                app:tint="@color/qf_muted" android:importantForAccessibility="no" />
+            <TextView style="@style/Body" android:text="Repairs" android:textSize="11sp" />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/navAccount" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+            android:orientation="vertical" android:gravity="center" android:padding="8dp" android:clickable="true" android:focusable="true">
+            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_person"
+                app:tint="@color/qf_muted" android:importantForAccessibility="no" />
+            <TextView style="@style/Body" android:text="Account" android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

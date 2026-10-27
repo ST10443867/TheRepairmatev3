@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "464593004420",
+    "project_id": "repairmate-bac33",
+    "storage_bucket": "repairmate-bac33.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464593004420:android:0cd21d7bb592ca812e1fd1",
+        "android_client_info": {
+          "package_name": "com.example.therepairmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464593004420-f68e6atrmlhrnpg73486p28e0cffmh0n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT6TMY2Lh9KkN28yHE2RtD2aArnQG3QNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464593004420-f68e6atrmlhrnpg73486p28e0cffmh0n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464593004420:android:f8bbf768e0f482602e1fd1",
+        "android_client_info": {
+          "package_name": "com.quickfix.repairmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464593004420-f68e6atrmlhrnpg73486p28e0cffmh0n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT6TMY2Lh9KkN28yHE2RtD2aArnQG3QNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464593004420-f68e6atrmlhrnpg73486p28e0cffmh0n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:padding="20dp" android:fitsSystemWindows="true">
+    <TextView android:id="@+id/tvTitle" style="@style/Heading" />
+    <EditText android:id="@+id/etSearch" android:layout_width="match_parent" android:layout_height="52dp"
+        android:layout_marginTop="12dp" android:hint="Search ticket, device or status"
+        android:textColorHint="@color/qf_muted" android:textColor="@color/qf_white"
+        android:paddingHorizontal="16dp" android:background="@drawable/bg_glass_card" android:inputType="text" />
+    <TextView android:id="@+id/tvEmpty" style="@style/Body" android:layout_gravity="center"
+        android:padding="24dp" android:visibility="gone" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler"
+        android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false" android:paddingBottom="24dp" android:scrollbars="vertical"
+        android:layoutAnimation="@anim/layout_fall" />
+</LinearLayout>

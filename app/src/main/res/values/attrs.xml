@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="GlassIconView">
+        <attr name="glassIcon" format="reference" />
+        <attr name="glassTint" format="color" />
+    </declare-styleable>
+    <declare-styleable name="JetButtonView">
+        <attr name="jetLabel" format="string" />
+    </declare-styleable>
+</resources>

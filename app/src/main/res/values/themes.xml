@@ -1,0 +1,32 @@
+<resources>
+    <style name="Theme.RepairMate" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/qf_blue</item>
+        <item name="colorSecondary">@color/qf_purple</item>
+        <item name="colorTertiary">@color/qf_cyan</item>
+        <item name="android:windowBackground">@drawable/bg_app</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/qf_white</item>
+    </style>
+    <style name="Heading">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/qf_white</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="SectionTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/qf_white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Body">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/qf_muted</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnim</item>
+    </style>
+</resources>

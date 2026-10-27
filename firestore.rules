@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Profiles: a user can create/read their own profile, but can never make themselves admin.
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create: if signedIn() && request.auth.uid == uid && request.resource.data.role == 'customer';
+      allow update: if signedIn() && request.auth.uid == uid && request.resource.data.role == resource.data.role;
+    }
+
+    // Repairs: customers see only their own; admins see and update everything.
+    match /repairs/{ticket} {
+      allow read: if signedIn() && (resource == null || resource.data.uid == request.auth.uid || isAdmin());
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.status == 'received';
+      allow update: if isAdmin();
+    }
+
+    // Booked time slots (document id = date_time), used to stop double-booking.
+    match /slots/{slot} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+  }
+}

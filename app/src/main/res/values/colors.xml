@@ -1,0 +1,13 @@
+<resources>
+    <color name="qf_black">#07080C</color>
+    <color name="qf_blue">#3B82F6</color>
+    <color name="qf_cyan">#06B6D4</color>
+    <color name="qf_purple">#8B5CF6</color>
+    <color name="qf_indigo">#6366F1</color>
+    <color name="qf_white">#FFFFFF</color>
+    <color name="qf_muted">#B0C4DE</color>
+    <color name="qf_text2">#E2E8F0</color>
+    <color name="qf_success">#10B981</color>
+    <color name="qf_warning">#F59E0B</color>
+    <color name="qf_danger">#EF4444</color>
+</resources>

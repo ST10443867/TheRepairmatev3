@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="16dp" android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_glass_card" android:clickable="true" android:focusable="true">
+    <TextView android:id="@+id/tvTicket" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="@color/qf_white" android:textStyle="bold" android:textSize="16sp" />
+    <TextView android:id="@+id/tvDevice" style="@style/Body" android:layout_marginTop="2dp" />
+    <TextView android:id="@+id/tvStatus" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" android:textColor="@color/qf_blue" android:textStyle="bold" />
+    <TextView android:id="@+id/tvTech" style="@style/Body" />
+</LinearLayout>
