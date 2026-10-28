@@ -32,6 +32,7 @@ class DashboardActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(b.root)

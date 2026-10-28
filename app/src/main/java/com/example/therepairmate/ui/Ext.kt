@@ -73,6 +73,7 @@ fun AppCompatActivity.showLanguageDialog(activity: AppCompatActivity) {
         .setTitle("Choose Language / Tlhopha Puo / Khetha Ulwimi")
         .setSingleChoiceItems(languages, currentIndex) { dialog, which ->
             val selectedLang = tags[which]
+            LanguagePrefs.set(activity, selectedLang)
             androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
                 androidx.core.os.LocaleListCompat.forLanguageTags(selectedLang)
             )
@@ -85,6 +86,29 @@ fun AppCompatActivity.showLanguageDialog(activity: AppCompatActivity) {
         }
         .setNegativeButton("Cancel", null)
         .show()
+}
+
+object LanguagePrefs {
+    private const val PREF = "repairmate_lang_pref"
+    private const val KEY_LANG = "language"
+
+    fun get(context: Context): String {
+        return context.getSharedPreferences(PREF, Context.MODE_PRIVATE).getString(KEY_LANG, "en") ?: "en"
+    }
+
+    fun set(context: Context, lang: String) {
+        context.getSharedPreferences(PREF, Context.MODE_PRIVATE).edit().putString(KEY_LANG, lang).apply()
+    }
+}
+
+fun AppCompatActivity.applyLocalLanguage() {
+    val lang = LanguagePrefs.get(this)
+    val current = androidx.appcompat.app.AppCompatDelegate.getApplicationLocales().toLanguageTags()
+    if (!current.contains(lang)) {
+        androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
+            androidx.core.os.LocaleListCompat.forLanguageTags(lang)
+        )
+    }
 }
 
 fun AppCompatActivity.addBackBar() {

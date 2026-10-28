@@ -27,6 +27,7 @@ class RepairsActivity : AppCompatActivity() {
     private val adapter = RepairAdapter { r -> if (admin) adminMenu(r) else open(r.id) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityRepairsBinding.inflate(layoutInflater)
         setContentView(b.root)

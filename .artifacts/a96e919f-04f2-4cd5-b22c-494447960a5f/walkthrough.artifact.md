@@ -1,19 +1,20 @@
-# Walkthrough - Optional Device Photo Upload for Repair Booking
+# Walkthrough - Global Synchronous Language Application
 
-Implemented an optional photo attachment feature allowing users to submit pictures of their laptops or phones when booking a repair.
+Fixed the issue where language settings only applied on the login page by switching to synchronous local shared preferences caching and applying locales before view inflation across all activities.
 
 ## Changes
 
-### 1. Data Model & Repository (`Models.kt`, `Repo.kt`)
-- Added `imageUrl` field to the [Repair](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/data/Models.kt) data class.
-- Updated `Repo.book` in [Repo.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/data/Repo.kt) to accept and persist `imageUrl` in Firestore.
+### 1. Synchronous Local Language Preferences (`Ext.kt`)
+- Created `LanguagePrefs` helper in [Ext.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/Ext.kt) to store and retrieve language tags locally using `SharedPreferences`.
+- Added `applyLocalLanguage()` extension function for `AppCompatActivity`.
 
-### 2. Booking Layout (`activity_book.xml`)
-- Added an optional **"Attach photo of device (optional)"** button (`btnAddPhoto`) and an `ImageView` (`ivDevicePhoto`) thumbnail preview container in [activity_book.xml](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/res/layout/activity_book.xml).
-
-### 3. Booking Activity (`BookRepairActivity.kt`)
-- Integrated `ActivityResultContracts.GetContent()` in [BookRepairActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/BookRepairActivity.kt) to allow picking device images from the gallery.
-- Displayed the selected image as a thumbnail preview and passed the image URI to `Repo.book`.
+### 2. Early Lifecycle Locale Application
+- Called `applyLocalLanguage()` at the very beginning of `onCreate()` (**before** `super.onCreate()`) across all app activities:
+  - [DashboardActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/DashboardActivity.kt)
+  - [AdminDashboardActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/AdminDashboardActivity.kt)
+  - [BookRepairActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/BookRepairActivity.kt)
+  - [RepairsActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/RepairsActivity.kt)
+  - [RepairDetailActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/RepairDetailActivity.kt)
 
 ## Verification Results
 

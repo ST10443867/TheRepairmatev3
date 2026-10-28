@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
         b.spinnerLanguage.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val lang = tags[position.coerceIn(tags.indices)]
+                LanguagePrefs.set(this@LoginActivity, lang)
                 val currentLocales = AppCompatDelegate.getApplicationLocales()
                 if (!currentLocales.toLanguageTags().contains(lang)) {
                     AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
@@ -112,11 +113,13 @@ class LoginActivity : AppCompatActivity() {
             try {
                 withTimeout(25_000) {
                     if (signup) {
+                        LanguagePrefs.set(this@LoginActivity, lang)
                         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
                         Repo.signUp(name, email, pass, lang)
                     } else {
                         Repo.signIn(email, pass)
                         val userLang = Repo.getUserLanguage()
+                        LanguagePrefs.set(this@LoginActivity, userLang)
                         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(userLang))
                     }
                 }
@@ -143,6 +146,7 @@ class LoginActivity : AppCompatActivity() {
                     withTimeout(25_000) {
                         Repo.signInWithGoogle(token, "en")
                         val userLang = Repo.getUserLanguage()
+                        LanguagePrefs.set(this@LoginActivity, userLang)
                         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(userLang))
                     }
                     toast("Signed in with Google")
@@ -178,6 +182,7 @@ class LoginActivity : AppCompatActivity() {
             }
         } catch (e: Exception) { null to "en" }
         if (lang != null) {
+            LanguagePrefs.set(this, lang)
             AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
         }
         val target = if (role == "admin") AdminDashboardActivity::class.java else DashboardActivity::class.java

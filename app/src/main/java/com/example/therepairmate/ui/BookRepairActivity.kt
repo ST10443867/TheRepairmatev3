@@ -37,6 +37,7 @@ class BookRepairActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityBookBinding.inflate(layoutInflater)
         setContentView(b.root)

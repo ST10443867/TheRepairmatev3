@@ -27,6 +27,7 @@ class AdminDashboardActivity : AppCompatActivity() {
     private var firstRender = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(b.root)

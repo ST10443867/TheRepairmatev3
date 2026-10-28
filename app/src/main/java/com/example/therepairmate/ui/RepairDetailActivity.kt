@@ -25,6 +25,7 @@ class RepairDetailActivity : AppCompatActivity() {
     private var summary = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(b.root)
