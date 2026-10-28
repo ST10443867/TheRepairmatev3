@@ -37,21 +37,54 @@ fun View.pressEffect() {
 }
 
 fun AppCompatActivity.confirmSignOut() {
-    AlertDialog.Builder(this).setTitle("Account").setMessage(Repo.email ?: "")
-        .setPositiveButton("Sign out") { _, _ ->
-            Repo.signOut()
-            val app = applicationContext
-            startActivity(
-                Intent(this, LoginActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            )
-            finishAffinity()
-            CoroutineScope(Dispatchers.Main).launch {
-                try { CredentialManager.create(app).clearCredentialState(ClearCredentialStateRequest()) }
-                catch (e: Exception) { }
+    val activity = this
+    val options = arrayOf("Change Language", "Sign out")
+    AlertDialog.Builder(this)
+        .setTitle("Account (${Repo.email ?: "User"})")
+        .setItems(options) { _, which ->
+            when (which) {
+                0 -> showLanguageDialog(activity)
+                1 -> {
+                    Repo.signOut()
+                    val app = applicationContext
+                    startActivity(
+                        Intent(this, LoginActivity::class.java)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+                    finishAffinity()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        try { CredentialManager.create(app).clearCredentialState(ClearCredentialStateRequest()) }
+                        catch (e: Exception) { }
+                    }
+                }
             }
         }
-        .setNegativeButton("Close", null).show()
+        .setNegativeButton("Close", null)
+        .show()
+}
+
+fun AppCompatActivity.showLanguageDialog(activity: AppCompatActivity) {
+    val languages = arrayOf("English", "Afrikaans", "Setswana", "isiXhosa", "isiZulu")
+    val tags = arrayOf("en", "af", "tn", "xh", "zu")
+    val currentTag = androidx.appcompat.app.AppCompatDelegate.getApplicationLocales().toLanguageTags()
+    val currentIndex = tags.indexOfFirst { currentTag.startsWith(it) }.let { if (it < 0) 0 else it }
+
+    AlertDialog.Builder(activity)
+        .setTitle("Choose Language / Tlhopha Puo / Khetha Ulwimi")
+        .setSingleChoiceItems(languages, currentIndex) { dialog, which ->
+            val selectedLang = tags[which]
+            androidx.appcompat.app.AppCompatDelegate.setApplicationLocales(
+                androidx.core.os.LocaleListCompat.forLanguageTags(selectedLang)
+            )
+            CoroutineScope(Dispatchers.IO).launch {
+                try { Repo.updateLanguage(selectedLang) } catch (e: Exception) { }
+            }
+            toast("Language updated")
+            dialog.dismiss()
+            activity.recreate()
+        }
+        .setNegativeButton("Cancel", null)
+        .show()
 }
 
 fun AppCompatActivity.addBackBar() {

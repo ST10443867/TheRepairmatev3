@@ -102,7 +102,7 @@ class AdminDashboardActivity : AppCompatActivity() {
     }
 
     private fun statusColor(s: RepairStatus): Int = when (s) {
-        RepairStatus.RECEIVED, RepairStatus.REPAIRING -> R.color.qf_blue
+        RepairStatus.BOOKING_CONFIRMED, RepairStatus.RECEIVED, RepairStatus.REPAIRING -> R.color.qf_blue
         RepairStatus.DIAGNOSING, RepairStatus.TESTING -> R.color.qf_purple
         RepairStatus.PARTS_ORDERED -> R.color.qf_warning
         RepairStatus.READY_FOR_PICKUP, RepairStatus.COMPLETED -> R.color.qf_success

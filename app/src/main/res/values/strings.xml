@@ -1,3 +1,91 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+    <string name="powered_by">by QuickFix Tech Solutions</string>
+    <!-- App -->
     <string name="app_name">The Repairmate</string>
+    <string name="subtitle_quickfix">by QuickFix Tech Solutions</string>
+
+    <!-- Login / Registration -->
+    <string name="full_name">Full name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="create_account">Create account</string>
+    <string name="or">or</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="forgot_password">Forgot password?</string>
+
+    <string name="toggle_signup">New here? Create an account</string>
+    <string name="toggle_signin">Already have an account? Sign in</string>
+
+    <!-- Language -->
+    <string name="choose_language">Choose your language</string>
+    <string name="lang_english">English</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_tswana">Setswana</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="lang_zulu">isiZulu</string>
+
+    <!-- Home -->
+    <string name="greeting_welcome">Welcome</string>
+    <string name="active_repair">ACTIVE REPAIR</string>
+    <string name="track_repair">Track repair</string>
+    <string name="something_broken">Something broken?</string>
+    <string name="services_subtitle">Get a preliminary estimate and reserve a drop-off slot with our technicians.</string>
+    <string name="book_a_repair">Book a repair</string>
+    <string name="our_services">Our services</string>
+    <string name="services_hint">Tap a service to start a booking. Prices are preliminary and subject to inspection.</string>
+    <string name="see_all">See all</string>
+    <string name="no_repairs_yet">No repairs yet. Book your first repair above.</string>
+
+    <!-- How it works -->
+    <string name="how_it_works">How it works</string>
+    <string name="step1_desc">Pick your device and issue to see a preliminary estimate.</string>
+    <string name="step2_desc">Reserve a weekday drop-off that suits you.</string>
+    <string name="step3_desc">Follow every stage of your repair from your phone.</string>
+
+    <!-- Help -->
+    <string name="need_help">Need help?</string>
+    <string name="store_hours">Store hours: Mon–Fri · 09:00–17:00</string>
+    <string name="call">Call</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="mail">Email</string>
+
+    <!-- Branding -->
+    <string name="product_tagline">The Repairmate · a QuickFix Tech Solutions product</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_book">Book</string>
+    <string name="nav_repairs">Repairs</string>
+    <string name="nav_account">Account</string>
+
+    <!-- Booking -->
+    <string name="device_type">Device type</string>
+    <string name="whats_wrong">What\'s wrong?</string>
+    <string name="choose_date">Choose date</string>
+    <string name="confirm_booking">Confirm booking</string>
+
+    <!-- Repairs -->
+    <string name="all_repairs">All repairs</string>
+    <string name="my_repairs">My repairs</string>
+    <string name="no_repairs_found">No repairs found</string>
+    <string name="share_receipt">Share receipt</string>
+
+    <!-- Admin -->
+    <string name="admin_console">Admin console</string>
+    <string name="admin">Admin</string>
+    <string name="active_repairs">Active repairs</string>
+    <string name="unassigned">Unassigned</string>
+    <string name="ready_for_pickup">Ready for pickup</string>
+    <string name="completed">Completed</string>
+    <string name="estimated_pipeline">ESTIMATED PIPELINE · ACTIVE REPAIRS</string>
+    <string name="pipeline_note">Sum of customer estimates. This is not revenue: payments are not recorded yet.</string>
+    <string name="repairs_by_status">Repairs by status</string>
+    <string name="technician_workload">Technician workload</string>
+    <string name="needs_a_technician">Needs a technician</string>
+    <string name="all_assigned">All active repairs are assigned to technicians</string>
+    <string name="manage_all_repairs">Manage all repairs</string>
+
 </resources>

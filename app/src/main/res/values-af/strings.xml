@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">The Repairmate</string>
+    <string name="subtitle_quickfix">deur QuickFix Tech Solutions</string>
+    <string name="full_name">Volle naam</string>
+    <string name="email">E-pos</string>
+    <string name="password">Wagwoord</string>
+    <string name="sign_in">Teken in</string>
+    <string name="create_account">Skep rekening</string>
+    <string name="or">of</string>
+    <string name="continue_with_google">Gaan voort met Google</string>
+    <string name="forgot_password">Wagwoord vergeet?</string>
+    <string name="toggle_signup">Nuut hier? Skep \'n rekening</string>
+    <string name="toggle_signin">Reeds \'n rekening? Teken in</string>
+    <string name="choose_language">Kies jou taal</string>
+    <string name="lang_english">English</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_tswana">Setswana</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="lang_zulu">isiZulu</string>
+
+    <string name="greeting_welcome">Welkom</string>
+    <string name="active_repair">AKTIEWE HERSTEL</string>
+    <string name="track_repair">Volg herstel</string>
+    <string name="something_broken">Iets stukkend?</string>
+    <string name="services_subtitle">Kry \'n voorlopige skatting en bespreek \'n afleweringsgleuf met ons tegnici.</string>
+    <string name="book_a_repair">Bespreek \'n herstel</string>
+    <string name="our_services">Ons dienste</string>
+    <string name="services_hint">Tik op \'n diens om te begin. Pryse is voorlopig en onderhewig aan inspeksie.</string>
+    <string name="see_all">Sien alles</string>
+    <string name="no_repairs_yet">Nog geen herstellings nie. Bespreek jou eerste herstel hierbo.</string>
+    <string name="how_it_works">Hoe dit werk</string>
+    <string name="step1_desc">Kies jou toestel en probleem om \'n voorlopige skatting te sien.</string>
+    <string name="step2_desc">Bespreek \'n weeksdag-aflewering wat jou pas.</string>
+    <string name="step3_desc">Volg elke stadium van jou herstel vanaf jou foon.</string>
+    <string name="need_help">Benodig hulp?</string>
+    <string name="store_hours">Winkelure: Ma–Vry · 09:00–17:00</string>
+    <string name="call">Bel</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="mail">E-pos</string>
+    <string name="product_tagline">The Repairmate · \'n QuickFix Tech Solutions-produk</string>
+    <string name="nav_home">Tuis</string>
+    <string name="nav_book">Bespreek</string>
+    <string name="nav_repairs">Herstellings</string>
+    <string name="nav_account">Rekening</string>
+
+    <string name="device_type">Toesteltipe</string>
+    <string name="whats_wrong">Wat is fout?</string>
+    <string name="choose_date">Kies datum</string>
+    <string name="confirm_booking">Bevestig bespreking</string>
+
+    <string name="all_repairs">Alle herstellings</string>
+    <string name="my_repairs">My herstellings</string>
+    <string name="no_repairs_found">Geen herstellings gevind nie</string>
+
+    <string name="share_receipt">Deel kwitansie</string>
+
+    <string name="admin_console">Admin konsole</string>
+    <string name="admin">Admin</string>
+    <string name="active_repairs">Aktiewe herstellings</string>
+    <string name="unassigned">Ongewysig</string>
+    <string name="ready_for_pickup">Gereed vir afhaal</string>
+    <string name="completed">Voltooi</string>
+    <string name="estimated_pipeline">GESKATTE PYPLYN · AKTIEWE HERSTELLINGS</string>
+    <string name="pipeline_note">Som van kliënteskatting. Dit is nie omset nie: betalings word nog nie aangeteken nie.</string>
+    <string name="repairs_by_status">Herstellings volgens status</string>
+    <string name="technician_workload">Tegnikus werkladings</string>
+    <string name="needs_a_technician">Benodig \'n tegnikus</string>
+    <string name="all_assigned">Alle aktiewe herstellings is aan tegnici toegewys</string>
+    <string name="manage_all_repairs">Bestuur alle herstellings</string>
+</resources>

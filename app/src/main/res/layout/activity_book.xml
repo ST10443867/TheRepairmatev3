@@ -45,6 +45,14 @@
                 android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button android:id="@+id/btnAddPhoto" android:layout_width="match_parent" android:layout_height="48dp"
+            android:layout_marginTop="12dp" android:text="Attach photo of device (optional)" android:textAllCaps="false"
+            android:background="@drawable/bg_glass_card" app:backgroundTint="@null" android:textColor="@color/qf_white" />
+
+        <ImageView android:id="@+id/ivDevicePhoto" android:layout_width="match_parent" android:layout_height="160dp"
+            android:layout_marginTop="8dp" android:scaleType="centerCrop" android:visibility="gone"
+            android:contentDescription="Device photo preview" android:background="@drawable/bg_glass_card" />
+
         <TextView android:id="@+id/tvError" style="@style/Body" android:textColor="#FF8A80" android:layout_marginTop="8dp" />
         <ProgressBar android:id="@+id/progress" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_gravity="center" android:visibility="gone" />

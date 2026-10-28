@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ==================== APP ==================== -->
+
+    <string name="app_name">The RepairMate</string>
+    <string name="subtitle_quickfix">ka QuickFix Tech Solutions</string>
+
+    <!-- ==================== LOGIN / REGISTER ==================== -->
+
+    <string name="full_name">Leina le le feletseng</string>
+    <string name="email">Imelo</string>
+    <string name="password">Phasewete</string>
+
+    <string name="sign_in">Tsena</string>
+    <string name="create_account">Tlhama aakhaonte</string>
+
+    <string name="or">kgotsa</string>
+
+    <string name="continue_with_google">Tswelela ka Google</string>
+
+    <string name="forgot_password">O lebetse phasewete?</string>
+
+    <string name="toggle_signup">O mocha fano? Tlhama aakhaonte</string>
+    <string name="toggle_signin">O setse o na le aakhaonte? Tsena</string>
+
+    <!-- ==================== LANGUAGE ==================== -->
+
+    <string name="choose_language">Tlhopha puo ya gago</string>
+
+    <string name="lang_english">English</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_tswana">Setswana</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="lang_zulu">isiZulu</string>
+
+    <!-- ==================== HOME ==================== -->
+
+    <string name="greeting_welcome">Amogela</string>
+
+    <string name="active_repair">BAAKANYO E E TSWELELANG</string>
+
+    <string name="track_repair">Latela baakanyo</string>
+
+    <string name="something_broken">Go thubegile sepe?</string>
+
+    <string name="services_subtitle">
+        Bona tekanyetso ya pele mme o bee lefelo la go tlogela le baetsi ba rona.
+    </string>
+
+    <string name="book_a_repair">Buka baakanyo</string>
+
+    <string name="our_services">Direlo tsa rona</string>
+
+    <string name="services_hint">
+        Tobetsa tirelo go simolola go buka. Dituelo ke tsa pele fela.
+    </string>
+
+    <string name="see_all">Bona tsotlhe</string>
+
+    <string name="no_repairs_yet">
+        Ga go na diakanyo gompieno. Buka ya ntlha fa godimo.
+    </string>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+
+    <string name="how_it_works">E bereka jang</string>
+
+    <string name="step1_desc">
+        Tlhopha sediriswa sa gago le bothata go bona tekanyetso ya pele.
+    </string>
+
+    <string name="step2_desc">
+        Boloka letsatsi la beke le le go siametseng.
+    </string>
+
+    <string name="step3_desc">
+        Latela karolo nngwe le nngwe ya baakanyo ya gago mo mogaleng wa gago.
+    </string>
+
+    <!-- ==================== HELP ==================== -->
+
+    <string name="need_help">O tlhoka thuso?</string>
+
+    <string name="store_hours">
+        Diura tsa lebenkele: Mosupulogo–Labotlhano · 09:00–17:00
+    </string>
+
+    <string name="call">Letsetsa</string>
+
+    <string name="whatsapp">WhatsApp</string>
+
+    <string name="mail">Imelo</string>
+
+    <!-- ==================== BRANDING ==================== -->
+
+    <string name="product_tagline">
+        The RepairMate · selahlelwa sa QuickFix Tech Solutions
+    </string>
+
+    <!-- ==================== NAVIGATION ==================== -->
+
+    <string name="nav_home">Gae</string>
+    <string name="nav_book">Buka</string>
+    <string name="nav_repairs">Diakanyo</string>
+    <string name="nav_account">Aakhaonte</string>
+
+    <!-- ==================== BOOKING ==================== -->
+
+    <string name="device_type">Mofuta wa sediriswa</string>
+
+    <string name="whats_wrong">Go fosagetse eng?</string>
+
+    <string name="choose_date">Tlhopha letsatsi</string>
+
+    <string name="confirm_booking">Netefatsa go buka</string>
+
+    <!-- ==================== REPAIRS ==================== -->
+
+    <string name="all_repairs">Diakanyo tsotlhe</string>
+
+    <string name="my_repairs">Diakanyo tsa me</string>
+
+    <string name="no_repairs_found">
+        Ga go na diakanyo di fitlhetswe
+    </string>
+
+    <string name="share_receipt">Abelana rasiti</string>
+
+    <!-- ==================== ADMIN ==================== -->
+
+    <string name="admin_console">Konsolo ya motsamaisi</string>
+
+    <string name="admin">Motsamaisi</string>
+
+    <string name="active_repairs">Diakanyo tse di tswelelang</string>
+
+    <string name="unassigned">Ga di abelwa</string>
+
+    <string name="ready_for_pickup">Di siametse go tsewa</string>
+
+    <string name="completed">Di fedile</string>
+
+    <string name="estimated_pipeline">
+        TEKANYETSO YA PELE · BAAKANYO
+    </string>
+
+    <string name="pipeline_note">
+        Paloganyo ya dikakanyo tsa bareki. Ga se madi a a amogetsweng.
+    </string>
+
+    <string name="repairs_by_status">Diakanyo ka maemo</string>
+
+    <string name="technician_workload">Mero tiro ya baetsi</string>
+
+    <string name="needs_a_technician">E tlhoka moetsi</string>
+
+    <string name="all_assigned">
+        Diakanyo tsotlhe di abetswe baetsi
+    </string>
+
+    <string name="manage_all_repairs">
+        Laola diakanyo tsotlhe
+    </string>
+
+</resources>

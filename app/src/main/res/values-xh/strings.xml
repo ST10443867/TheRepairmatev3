@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">The Repairmate</string>
+    <string name="subtitle_quickfix">ngu-QuickFix Tech Solutions</string>
+    <string name="full_name">Igama elipheleleyo</string>
+    <string name="email">I-imeyile</string>
+    <string name="password">Ipasawedi</string>
+    <string name="sign_in">Ngena</string>
+    <string name="create_account">Yenza iakhawunti</string>
+    <string name="or">okanye</string>
+    <string name="continue_with_google">Qhubeka noGoogle</string>
+    <string name="forgot_password">Uyibandule ipasawedi?</string>
+    <string name="toggle_signup">Mtsha apha? Yenza iakhawunti</string>
+    <string name="toggle_signin">Unayo iakhawunti? Ngena</string>
+    <string name="choose_language">Khetha ulwimi lwakho</string>
+    <string name="lang_english">English</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_tswana">Setswana</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="lang_zulu">isiZulu</string>
+
+    <string name="greeting_welcome">Wamkelekile</string>
+    <string name="active_repair">ULUNGISO OLUSEBENZAYO</string>
+    <string name="track_repair">Landela ulungiso</string>
+    <string name="something_broken">Kukho into eyaphukileyo?</string>
+    <string name="services_subtitle">Fumana uqikelelo lokuqala kwaye ugcine indawo yokushiya kunye namagcisa ethu.</string>
+    <string name="book_a_repair">Bhukha ulungiso</string>
+    <string name="our_services">Iinkonzo zethu</string>
+    <string name="services_hint">Cofa inkonzo ukuqala ukubhukha. Amaxabiso ngakuqala.</string>
+    <string name="see_all">Zonke</string>
+    <string name="no_repairs_yet">Akukho kulungiso okwangoku. Bhukha okokuqala ngasentla.</string>
+    <string name="how_it_works">Sebenza njani</string>
+    <string name="step1_desc">Khetha isixhobo sakho nengxaki ukuze ubone uqikelelo lokuqala.</string>
+    <string name="step2_desc">Gcina umhla wemveki okulungeleyo.</string>
+    <string name="step3_desc">Landela zonke izigaba zolungiso lwakho kwifowuni yakho.</string>
+    <string name="need_help">Ufuna uncedo?</string>
+    <string name="store_hours">Iiyure zevenkile: NgoMqibelo–NgoLwesihlanu · 09:00–17:00</string>
+    <string name="call">Tsala</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="mail">I-imeyile</string>
+    <string name="product_tagline">The Repairmate · imveliso ye-QuickFix Tech Solutions</string>
+    <string name="nav_home">Ikhaya</string>
+    <string name="nav_book">Bhukha</string>
+    <string name="nav_repairs">Ulungiso</string>
+    <string name="nav_account">Iakhawunti</string>
+
+    <string name="device_type">Uhlobo lwesixhobo</string>
+    <string name="whats_wrong">Kungalunganga ntoni?</string>
+    <string name="choose_date">Khetha umhla</string>
+    <string name="confirm_booking">Qinisekisa ukubhukha</string>
+
+    <string name="all_repairs">Zonke ulungiso</string>
+    <string name="my_repairs">Ulungiso lwam</string>
+    <string name="no_repairs_found">Akukho lungiso lufunyenweyo</string>
+
+    <string name="share_receipt">Yabelana ngerisithi</string>
+
+    <string name="admin_console">Ikhonsoli yolawulo</string>
+    <string name="admin">Ulawulo</string>
+    <string name="active_repairs">Ulungiso olusebenzayo</string>
+    <string name="unassigned">Akwabelwanga</string>
+    <string name="ready_for_pickup">Kulungele ukuthathwa</string>
+    <string name="completed">Gqityiwe</string>
+    <string name="estimated_pipeline">UQIKELELO LOKUQALA · ULUNGISO</string>
+    <string name="pipeline_note">Isixa soqikelelo lwabathengi. Ayisiyiyo ingeniso.</string>
+    <string name="repairs_by_status">Ulungiso ngobume</string>
+    <string name="technician_workload">Umsebenzi wamagcisa</string>
+    <string name="needs_a_technician">Idinga umgcisa</string>
+    <string name="all_assigned">Zonke ulungiso lwabelwe amagcisa</string>
+    <string name="manage_all_repairs">Lawula zonke ulungiso</string>
+</resources>

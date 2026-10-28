@@ -31,29 +31,41 @@ object Repo {
 
     suspend fun signIn(email: String, password: String) { auth.signInWithEmailAndPassword(email, password).await() }
 
-    suspend fun signUp(name: String, email: String, password: String) {
+    suspend fun signUp(name: String, email: String, password: String, language: String = "en") {
         val user = auth.createUserWithEmailAndPassword(email, password).await().user!!
         db.collection("users").document(user.uid).set(
             mapOf(
                 "uid" to user.uid, "email" to email, "role" to "customer", "name" to name,
+                "language" to language,
                 "createdAt" to FieldValue.serverTimestamp(), "updatedAt" to FieldValue.serverTimestamp()
             )
         ).await()
     }
 
     /** Signs in with a Google ID token. Creates a customer profile on first login and never overwrites an existing role. */
-    suspend fun signInWithGoogle(idToken: String) {
+    suspend fun signInWithGoogle(idToken: String, language: String = "en") {
         val user = auth.signInWithCredential(GoogleAuthProvider.getCredential(idToken, null)).await().user!!
         val ref = db.collection("users").document(user.uid)
         if (!ref.get().await().exists()) {
             ref.set(
                 mapOf(
                     "uid" to user.uid, "email" to (user.email ?: ""), "role" to "customer",
-                    "name" to (user.displayName ?: ""),
+                    "name" to (user.displayName ?: ""), "language" to language,
                     "createdAt" to FieldValue.serverTimestamp(), "updatedAt" to FieldValue.serverTimestamp()
                 )
             ).await()
         }
+    }
+
+    suspend fun getUserLanguage(): String {
+        val id = uid ?: return "en"
+        val d = db.collection("users").document(id).get().await()
+        return d.getString("language") ?: "en"
+    }
+
+    suspend fun updateLanguage(language: String) {
+        val id = uid ?: return
+        db.collection("users").document(id).update("language", language).await()
     }
 
     /** Creates a customer profile if the signed-in user has none (e.g. older accounts). Never touches an existing role. */
@@ -110,7 +122,7 @@ object Repo {
     /** Slot + repair are written in ONE transaction, so two users cannot take the same slot. */
     suspend fun book(
         model: String, type: String, issue: String, diag: Diagnostic,
-        est: Estimate, slot: Slot, notes: String
+        est: Estimate, slot: Slot, notes: String, imageUrl: String = ""
     ): BookResult {
         val user = uid ?: error("Not signed in")
         repeat(5) {
@@ -128,10 +140,11 @@ object Repo {
                     "ticketId" to ticket, "uid" to user, "deviceModel" to model, "deviceType" to type,
                     "issueDescription" to issue,
                     "diagnosticData" to mapOf("deviceType" to diag.deviceType, "issueType" to diag.issueType, "answers" to diag.answers),
-                    "status" to RepairStatus.RECEIVED.key, "techAssigned" to null,
+                    "status" to RepairStatus.BOOKING_CONFIRMED.key, "techAssigned" to null,
                     "scheduledSlot" to mapOf("date" to slot.date, "startTime" to slot.start, "endTime" to slot.end, "timezone" to SlotGenerator.ZONE.id),
                     "estimatedCost" to mapOf("minimum" to est.min, "maximum" to est.max, "currency" to est.currency),
                     "notes" to notes,
+                    "imageUrl" to imageUrl,
                     "dateCreated" to FieldValue.serverTimestamp(), "updatedAt" to FieldValue.serverTimestamp()
                 ))
                 "ok"

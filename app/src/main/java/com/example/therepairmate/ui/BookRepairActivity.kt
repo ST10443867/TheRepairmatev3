@@ -2,11 +2,13 @@ package com.example.therepairmate.ui
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
@@ -16,14 +18,23 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-class
-BookRepairActivity : AppCompatActivity() {
+class BookRepairActivity : AppCompatActivity() {
 
     companion object { const val EXTRA_ISSUE = "issue" }
     private lateinit var b: ActivityBookBinding
     private var estimate = EstimateService.get("Laptop", "Screen")
     private var selected: Slot? = null
     private var date: LocalDate? = null
+    private var photoUri: Uri? = null
+
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
+            photoUri = uri
+            b.ivDevicePhoto.visibility = View.VISIBLE
+            b.ivDevicePhoto.setImageURI(uri)
+            b.btnAddPhoto.text = "Change photo"
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +59,8 @@ BookRepairActivity : AppCompatActivity() {
         updateEstimate()
 
         b.btnDate.setOnClickListener { pickDate() }
+        b.btnAddPhoto.setOnClickListener { pickImageLauncher.launch("image/*") }
+        b.btnAddPhoto.pressEffect()
         b.btnSubmit.setOnClickListener { submit() }
     }
 
@@ -101,7 +114,7 @@ BookRepairActivity : AppCompatActivity() {
             b.progress.visibility = View.VISIBLE; b.btnSubmit.isEnabled = false
             try {
                 val r = Repo.book(model, type, issue, Diagnostic(type, issueType, mapOf("device" to type, "symptom" to issueType)),
-                    estimate, slot, b.etNotes.text.toString().trim())
+                    estimate, slot, b.etNotes.text.toString().trim(), photoUri?.toString() ?: "")
                 when (r) {
                     is BookResult.Success -> {
                         Toast.makeText(this@BookRepairActivity, "Booked ${r.ticketId}", Toast.LENGTH_LONG).show()

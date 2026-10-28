@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
@@ -44,6 +46,30 @@ class LoginActivity : AppCompatActivity() {
         b.btnSubmit.setOnClickListener { submit() }
         b.btnGoogle.setOnClickListener { googleSignIn() }
         b.tvForgot.setOnClickListener { forgot() }
+        val languages = arrayOf("English", "Afrikaans", "Setswana", "isiXhosa", "isiZulu")
+        val tags = arrayOf("en", "af", "tn", "xh", "zu")
+        val adapter = android.widget.ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, languages)
+        b.spinnerLanguage.adapter = adapter
+
+        val currentTag = AppCompatDelegate.getApplicationLocales().toLanguageTags()
+        val currentIndex = tags.indexOfFirst { currentTag.startsWith(it) }.let { if (it < 0) 0 else it }
+        b.spinnerLanguage.setSelection(currentIndex, false)
+
+        b.spinnerLanguage.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val lang = tags[position.coerceIn(tags.indices)]
+                val currentLocales = AppCompatDelegate.getApplicationLocales()
+                if (!currentLocales.toLanguageTags().contains(lang)) {
+                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
+                    if (Repo.uid != null) {
+                        lifecycleScope.launch {
+                            try { Repo.updateLanguage(lang) } catch (e: Exception) {}
+                        }
+                    }
+                }
+            }
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
+        }
 
         // Already signed in: go straight to the right dashboard, with visible feedback.
         if (Repo.uid != null) lifecycleScope.launch { route("Welcome back…") }
@@ -58,19 +84,42 @@ class LoginActivity : AppCompatActivity() {
         b.tvError.shake()
     }
 
+    private fun isValidEmail(email: String): Boolean {
+        return email.isNotBlank() &&
+                Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
+                email.contains("@") &&
+                email.contains(".") &&
+                !email.endsWith(".") &&
+                !email.startsWith("@")
+    }
+
     private fun submit() {
         val name = b.etName.text.toString().trim()
         val email = b.etEmail.text.toString().trim()
         val pass = b.etPassword.text.toString()
+        val tags = arrayOf("en", "af", "tn", "xh", "zu")
+        val lang = tags[b.spinnerLanguage.selectedItemPosition.coerceIn(tags.indices)]
         when {
             signup && name.isEmpty() -> return fail("Enter your name")
-            !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> return fail("Enter a valid email")
+            !isValidEmail(email) -> return fail("Enter a valid email address (e.g., user@example.com)")
             pass.length < 6 -> return fail("Password must be at least 6 characters")
+            signup && !pass.any { it.isUpperCase() } -> return fail("Password must contain at least one uppercase letter (caps)")
+            signup && !pass.any { it.isLowerCase() } -> return fail("Password must contain at least one lowercase letter")
+            signup && !pass.any { !it.isLetterOrDigit() } -> return fail("Password must contain at least one symbol (e.g. !@#$%)")
         }
         lifecycleScope.launch {
             busy(true, if (signup) "Creating your account…" else "Signing you in…")
             try {
-                withTimeout(25_000) { if (signup) Repo.signUp(name, email, pass) else Repo.signIn(email, pass) }
+                withTimeout(25_000) {
+                    if (signup) {
+                        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
+                        Repo.signUp(name, email, pass, lang)
+                    } else {
+                        Repo.signIn(email, pass)
+                        val userLang = Repo.getUserLanguage()
+                        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(userLang))
+                    }
+                }
                 toast(if (signup) "Account created. Welcome!" else "Signed in successfully")
                 route("Loading your workspace…")
             } catch (e: Exception) {
@@ -91,7 +140,11 @@ class LoginActivity : AppCompatActivity() {
                 if (cred is CustomCredential && cred.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
                     busy(true, "Signing you in with Google…")
                     val token = GoogleIdTokenCredential.createFrom(cred.data).idToken
-                    withTimeout(25_000) { Repo.signInWithGoogle(token) }
+                    withTimeout(25_000) {
+                        Repo.signInWithGoogle(token, "en")
+                        val userLang = Repo.getUserLanguage()
+                        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(userLang))
+                    }
                     toast("Signed in with Google")
                     route("Loading your workspace…")
                 } else {
@@ -116,9 +169,17 @@ class LoginActivity : AppCompatActivity() {
     /** Admins go to the admin console, everyone else to the customer dashboard. */
     private suspend fun route(message: String) {
         busy(true, message)
-        val role = try {
-            withTimeout(10_000) { Repo.ensureProfile(); Repo.profile()?.second }
-        } catch (e: Exception) { null }
+        val (role, lang) = try {
+            withTimeout(10_000) {
+                Repo.ensureProfile()
+                val r = Repo.profile()?.second
+                val l = Repo.getUserLanguage()
+                r to l
+            }
+        } catch (e: Exception) { null to "en" }
+        if (lang != null) {
+            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(lang))
+        }
         val target = if (role == "admin") AdminDashboardActivity::class.java else DashboardActivity::class.java
         startActivity(Intent(this, target))
         finish()
@@ -126,7 +187,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun forgot() {
         val email = b.etEmail.text.toString().trim()
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) return fail("Enter your email above first")
+        if (!isValidEmail(email)) return fail("Enter a valid email above first")
         lifecycleScope.launch {
             try {
                 withTimeout(15_000) { Repo.resetPassword(email) }
@@ -154,5 +215,7 @@ class LoginActivity : AppCompatActivity() {
         b.tvStatus.visibility = View.GONE
         b.tvError.setTextColor(ContextCompat.getColor(this, R.color.qf_danger))
         b.tvError.text = msg
+        b.tvError.shake()
+        toast(msg)
     }
 }

@@ -1,0 +1,70 @@
+<resources>
+    <string name="app_name">The Repairmate</string>
+    <string name="subtitle_quickfix">ngu-QuickFix Tech Solutions</string>
+    <string name="full_name">Igama eliphelele</string>
+    <string name="email">I-imeyili</string>
+    <string name="password">Iphasiwedi</string>
+    <string name="sign_in">Ngena</string>
+    <string name="create_account">Dala i-akhawunti</string>
+    <string name="or">noma</string>
+    <string name="continue_with_google">Qhubeka noGoogle</string>
+    <string name="forgot_password">Ukhohlwe iphasiwedi?</string>
+    <string name="toggle_signup">Musha lapha? Dala i-akhawunti</string>
+    <string name="toggle_signin">Unayo i-akhawunti? Ngena</string>
+    <string name="choose_language">Khetha ulimi lwakho</string>
+    <string name="lang_english">English</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_tswana">Setswana</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="lang_zulu">isiZulu</string>
+
+    <string name="greeting_welcome">Siyakwamukela</string>
+    <string name="active_repair">UKULUNGISA OKUQHUBEKAYO</string>
+    <string name="track_repair">Landela ukulungisa</string>
+    <string name="something_broken">Kukhona okwephukile?</string>
+    <string name="services_subtitle">Thola isilinganiso sokuqala bese ubhukha indawo yokushiya nochwepheshe bethu.</string>
+    <string name="book_a_repair">Bhukha ukulungisa</string>
+    <string name="our_services">Izinsiza zethu</string>
+    <string name="services_hint">Cindezela inkonzo ukuqala ukubhukha. Amanani awesikhathi sokuqala.</string>
+    <string name="see_all">Konke</string>
+    <string name="no_repairs_yet">Akukho kulungisa okwamanje. Bhukha okokuqala ngenhla.</string>
+    <string name="how_it_works">Kusebenza kanjani</string>
+    <string name="step1_desc">Khetha ucingo lwakho nenkinga ukuze ubone isilinganiso sokuqala.</string>
+    <string name="step2_desc">Gcina usuku lwesonto olukufanele.</string>
+    <string name="step3_desc">Landela zonke izigaba zokulungisa kwakho ocingweni lwakho.</string>
+    <string name="need_help">Udinga usizo?</string>
+    <string name="store_hours">Amahora wesitolo: NgoMsombuluko–NgoLwesihlanu · 09:00–17:00</string>
+    <string name="call">Shayela</string>
+    <string name="whatsapp">WhatsApp</string>
+    <string name="mail">I-imeyili</string>
+    <string name="product_tagline">The Repairmate · umkhiqizo we-QuickFix Tech Solutions</string>
+    <string name="nav_home">Ikhaya</string>
+    <string name="nav_book">Bhukha</string>
+    <string name="nav_repairs">Okulungiswayo</string>
+    <string name="nav_account">I-akhawunti</string>
+
+    <string name="device_type">Uhlobo lwedivayisi</string>
+    <string name="whats_wrong">Kungalungile ini?</string>
+    <string name="choose_date">Khetha usuku</string>
+    <string name="confirm_booking">Qinisekisa ukubhukha</string>
+
+    <string name="all_repairs">Konke okulungiswayo</string>
+    <string name="my_repairs">Okulungiswayo kwami</string>
+    <string name="no_repairs_found">Akukho okulungiswayo okutholakele</string>
+
+    <string name="share_receipt">Yabelana ngelisidi</string>
+
+    <string name="admin_console">Ikhonsoli yomlawuli</string>
+    <string name="admin">Umlawuli</string>
+    <string name="active_repairs">Okulungiswayo okuqhubekayo</string>
+    <string name="unassigned">Akunikeziwe</string>
+    <string name="ready_for_pickup">Kulungele ukuthathwa</string>
+    <string name="completed">Kuqediwe</string>
+    <string name="estimated_pipeline">ISILINGANISO SOKUQALA · OKULUNGISWAYO</string>
+    <string name="pipeline_note">Inani lezilinganiso zamakhasimende. Akuyona imali engenayo.</string>
+    <string name="repairs_by_status">Okulungiswayo ngesimo</string>
+    <string name="technician_workload">Umsebenzi wochwepheshe</string>
+    <string name="needs_a_technician">Kudinga uchwepheshe</string>
+    <string name="all_assigned">Konke okulungiswayo kunikezwe ochwepheshe</string>
+    <string name="manage_all_repairs">Phatha konke okulungiswayo</string>
+</resources>
