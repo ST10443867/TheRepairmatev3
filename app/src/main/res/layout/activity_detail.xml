@@ -20,6 +20,17 @@
 
         <TextView android:id="@+id/tvStatus" android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:textColor="@color/qf_blue" android:textStyle="bold" android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivRepairPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:background="@drawable/bg_glass_card"
+            android:contentDescription="@string/device_photo_desc" />
+
         <LinearLayout android:id="@+id/timeline" android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="vertical" android:layout_marginTop="16dp" android:padding="16dp"
             android:background="@drawable/bg_glass_card" />

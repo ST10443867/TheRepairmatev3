@@ -25,7 +25,7 @@ import com.google.firebase.FirebaseApp
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     private lateinit var b: ActivityLoginBinding
     private var signup = false
 

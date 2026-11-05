@@ -5,7 +5,6 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -19,13 +18,12 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class RepairDetailActivity : AppCompatActivity() {
+class RepairDetailActivity : BaseActivity() {
     companion object { const val EXTRA_ID = "id" }
     private lateinit var b: ActivityDetailBinding
     private var summary = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(b.root)
@@ -35,7 +33,7 @@ class RepairDetailActivity : AppCompatActivity() {
 
         b.btnShare.setOnClickListener {
             startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, summary), "Share receipt"))
+                .putExtra(Intent.EXTRA_TEXT, summary), getString(R.string.share_receipt)))
         }
         // Real-time listener: updates the moment an admin changes the status.
         lifecycleScope.launch {
@@ -50,7 +48,13 @@ class RepairDetailActivity : AppCompatActivity() {
 
     private fun render(r: Repair) {
         b.tvTicket.text = r.ticketId
-        b.tvStatus.text = r.statusEnum.label
+        b.tvStatus.text = r.statusEnum.label(this)
+        if (r.imageUrl.isNotBlank()) {
+            b.ivRepairPhoto.visibility = android.view.View.VISIBLE
+            b.ivRepairPhoto.loadUrl(r.imageUrl)
+        } else {
+            b.ivRepairPhoto.visibility = android.view.View.GONE
+        }
         val cur = r.statusEnum.roadmapIndex
         b.timeline.removeAllViews()
         RepairStatus.roadmap.forEachIndexed { i, s ->
@@ -62,7 +66,7 @@ class RepairDetailActivity : AppCompatActivity() {
             }
             val dot = ContextCompat.getDrawable(this, R.drawable.dot)!!.mutate().apply { setTint(color) }
             b.timeline.addView(TextView(this).apply {
-                text = s.label
+                text = s.label(this@RepairDetailActivity)
                 textSize = 16f
                 gravity = Gravity.CENTER_VERTICAL
                 compoundDrawablePadding = 24
@@ -76,12 +80,12 @@ class RepairDetailActivity : AppCompatActivity() {
         b.tvInfo.text = """
             Device: ${r.deviceModel} (${r.deviceType})
             Issue: ${r.issueDescription}
-            Technician: ${r.techAssigned ?: "Not yet assigned"}
+            Technician: ${r.techAssigned ?: getString(R.string.tech_not_assigned)}
             Appointment: ${r.scheduledSlot.date} ${r.scheduledSlot.startTime}–${r.scheduledSlot.endTime} (${r.scheduledSlot.timezone})
             Estimate: R${c.minimum} – R${c.maximum} (preliminary)
             Created: ${fmt(r.dateCreated)}
             Updated: ${fmt(r.updatedAt)}
         """.trimIndent()
-        summary = "The Repairmate by QuickFix Tech Solutions\nTicket: ${r.ticketId}\n${b.tvInfo.text}\nStatus: ${r.statusEnum.label}"
+        summary = "The Repairmate by QuickFix Tech Solutions\nTicket: ${r.ticketId}\n${b.tvInfo.text}\nStatus: ${r.statusEnum.label(this)}"
     }
 }

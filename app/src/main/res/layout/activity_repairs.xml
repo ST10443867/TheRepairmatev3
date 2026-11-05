@@ -7,6 +7,33 @@
         android:layout_marginTop="12dp" android:hint="Search ticket, device or status"
         android:textColorHint="@color/qf_muted" android:textColor="@color/qf_white"
         android:paddingHorizontal="16dp" android:background="@drawable/bg_glass_card" android:inputType="text" />
+
+    <LinearLayout
+        android:id="@+id/llAdminFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:weightSum="2"
+        android:visibility="gone">
+
+        <Spinner
+            android:id="@+id/spinnerFilter"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_glass_card"
+            android:layout_marginEnd="4dp" />
+
+        <Spinner
+            android:id="@+id/spinnerSort"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_glass_card"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
     <TextView android:id="@+id/tvEmpty" style="@style/Body" android:layout_gravity="center"
         android:padding="24dp" android:visibility="gone" />
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/recycler"

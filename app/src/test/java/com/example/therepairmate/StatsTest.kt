@@ -52,10 +52,11 @@ class StatsTest {
     }
 
     @Test fun stepOfFollowsRoadmap() {
-        assertEquals(1, Stats.stepOf(r("received")))
-        assertEquals(4, Stats.stepOf(r("repairing")))
-        assertEquals(6, Stats.stepOf(r("ready_for_pickup")))
-        assertEquals(6, Stats.stepOf(r("completed")))
+        assertEquals(1, Stats.stepOf(r("booking_confirmed")))
+        assertEquals(2, Stats.stepOf(r("received")))
+        assertEquals(5, Stats.stepOf(r("repairing")))
+        assertEquals(7, Stats.stepOf(r("ready_for_pickup")))
+        assertEquals(7, Stats.stepOf(r("completed")))
         assertEquals(0, Stats.stepOf(r("cancelled")))
     }
 

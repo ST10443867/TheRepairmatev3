@@ -1,32 +1,26 @@
-# Implementation Plan: Optional Device Photo Upload for Repair Booking
-
-Add an optional device photo attachment option (laptops or phones) to the repair booking screen, store the image reference in the data model, and persist it in Firestore.
+# Implementation Plan: 50 Phone Fallback, Interactive Admin Dashboard/Charts, Filter/Sort Repairs & Admin Branding
 
 ## User Review Required
 
 > [!IMPORTANT]
-> - **Optional Photo Picker**: Users can attach a photo of their device from their gallery when booking a repair. It is completely optional.
-> - **Thumbnail Preview**: Shows a preview of the attached photo.
-> - **Persistence**: Stores the image URI/URL in the `Repair` record in Firestore.
+> - **50 Offline Phone Specs**: Expanded mock phone database to 50 popular models across major brands.
+> - **Interactive Admin Dashboard & Charts**: Clicking KPI cards (Active, Unassigned, Ready for pickup, Completed), status bars, or technician workload bars will filter and display the corresponding repairs.
+> - **Admin Filter & Sort**: Added status filtering and sorting (Newest/Oldest/Ticket ID) options in the admin repair management page.
+> - **Admin Branding**: Added QuickFix logo in top-left header and a semi-transparent watermark in the background of the admin dashboard.
 
 ## Proposed Changes
 
-### 1. Data Model Update (`Models.kt`, `Repo.kt`)
-#### [MODIFY] [Models.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/data/Models.kt)
-- Add `var imageUrl: String = ""` to `Repair` data class.
+### 1. Phone Specs Offline Fallback (`PhoneSpecsActivity.kt`)
+- Expand `getMockPhones()` to contain 50 popular phone models with thumbnails and GSM-style specs.
 
-#### [MODIFY] [Repo.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/data/Repo.kt)
-- Update `book(...)` method to accept and store `imageUrl`.
+### 2. Admin Dashboard Layout & Branding (`activity_admin.xml`, `AdminDashboardActivity.kt`)
+- Add QuickFix logo (`@drawable/logo`) in top-left header of `activity_admin.xml`.
+- Add transparent background watermark text "QUICKFIX TECH SOLUTIONS".
+- Make KPI cards (`cardActive`, `cardUnassigned`, `cardReady`, `cardCompleted`), status status bars, and technician workload bars clickable with press effects and click listeners passing filter intents to `RepairsActivity`.
 
-### 2. Booking Layout (`activity_book.xml`)
-#### [MODIFY] [activity_book.xml](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/res/layout/activity_book.xml)
-- Add a button `btnAddPhoto` ("Attach photo of device (optional)").
-- Add an `ImageView` (`ivDevicePhoto`) for thumbnail preview.
-
-### 3. Booking Activity (`BookRepairActivity.kt`)
-#### [MODIFY] [BookRepairActivity.kt](file:///C:/Users/Lesego_Mogara/Downloads/New%20folder/TheRepairmate-master/app/src/main/java/com/example/therepairmate/ui/BookRepairActivity.kt)
-- Add image picker launcher (`ActivityResultContracts.GetContent()`).
-- Handle photo selection, display thumbnail preview, and pass `photoUri` to `Repo.book`.
+### 3. Repair Management Filter & Sort (`activity_repairs.xml`, `RepairsActivity.kt`)
+- Add filter spinner/chips and sort spinner in `activity_repairs.xml` for admin view.
+- Implement filtering by status/technician and sorting by date/ticket ID in `RepairsActivity.kt`.
 
 ## Verification Plan
 
@@ -34,4 +28,4 @@ Add an optional device photo attachment option (laptops or phones) to the repair
 - Run Gradle build (`app:assembleDebug`) to verify compilation.
 
 ### Manual Verification
-- Deploy app and test booking a repair with and without attaching an optional device photo.
+- Deploy app and test 50 offline phones, interactive admin KPI/charts, repair filter/sort, and admin branding.

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.therepairmate.R
 import com.example.therepairmate.data.Repair
 import com.example.therepairmate.databinding.ItemRepairBinding
 
@@ -18,10 +19,11 @@ class RepairAdapter(private val onClick: (Repair) -> Unit) :
 
     override fun onBindViewHolder(h: VH, i: Int) {
         val r = getItem(i)
+        val context = h.itemView.context
         h.b.tvTicket.text = r.ticketId
         h.b.tvDevice.text = "${r.deviceModel} • ${r.issueDescription}"
-        h.b.tvStatus.text = r.statusEnum.label
-        h.b.tvTech.text = "Technician: ${r.techAssigned ?: "Unassigned"}"
+        h.b.tvStatus.text = r.statusEnum.label(context)
+        h.b.tvTech.text = r.techAssigned?.let { context.getString(R.string.tech_assigned, it) } ?: context.getString(R.string.unassigned)
         h.b.root.setOnClickListener { onClick(r) }
     }
 

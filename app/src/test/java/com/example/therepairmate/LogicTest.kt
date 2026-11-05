@@ -74,16 +74,17 @@ class SlotGeneratorTest {
 class RepairStatusTest {
     @Test fun fromKeyParsesAllValues() =
         RepairStatus.entries.forEach { assertEquals(it, RepairStatus.fromKey(it.key)) }
-    @Test fun unknownDefaultsToReceived() = assertEquals(RepairStatus.RECEIVED, RepairStatus.fromKey("nope"))
-    @Test fun nullDefaultsToReceived() = assertEquals(RepairStatus.RECEIVED, RepairStatus.fromKey(null))
-    @Test fun roadmapHasSixOrderedSteps() {
-        assertEquals(6, RepairStatus.roadmap.size)
+    @Test fun unknownDefaultsToBookingConfirmed() = assertEquals(RepairStatus.BOOKING_CONFIRMED, RepairStatus.fromKey("nope"))
+    @Test fun nullDefaultsToBookingConfirmed() = assertEquals(RepairStatus.BOOKING_CONFIRMED, RepairStatus.fromKey(null))
+    @Test fun roadmapHasSevenOrderedSteps() {
+        assertEquals(7, RepairStatus.roadmap.size)
         assertEquals(RepairStatus.READY_FOR_PICKUP, RepairStatus.roadmap.last())
     }
     @Test fun roadmapIndexes() {
-        assertEquals(0, RepairStatus.RECEIVED.roadmapIndex)
-        assertEquals(3, RepairStatus.REPAIRING.roadmapIndex)
-        assertEquals(6, RepairStatus.COMPLETED.roadmapIndex)
+        assertEquals(0, RepairStatus.BOOKING_CONFIRMED.roadmapIndex)
+        assertEquals(1, RepairStatus.RECEIVED.roadmapIndex)
+        assertEquals(4, RepairStatus.REPAIRING.roadmapIndex)
+        assertEquals(7, RepairStatus.COMPLETED.roadmapIndex)
         assertEquals(-1, RepairStatus.CANCELLED.roadmapIndex)
     }
     @Test fun firestoreKeysAreSnakeCase() {

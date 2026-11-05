@@ -21,7 +21,7 @@ import kotlinx.coroutines.withTimeout
 import java.time.LocalTime
 
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : BaseActivity() {
     private lateinit var b: ActivityDashboardBinding
     private var heroId: String? = null
 
@@ -32,13 +32,12 @@ class DashboardActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(b.root)
         if (Repo.uid == null) { toLogin(); return }
 
-        b.tvGreeting.text = Greeting.forHour(LocalTime.now().hour)
+        b.tvGreeting.text = Greeting.forHour(this, LocalTime.now().hour)
         b.tvName.setOnClickListener { b.scrollView.smoothScrollToTop() }
         b.tvGreeting.setOnClickListener { b.scrollView.smoothScrollToTop() }
         wireClicks()
@@ -51,12 +50,14 @@ class DashboardActivity : AppCompatActivity() {
     private fun wireClicks() {
         val book = { startActivity(Intent(this, BookRepairActivity::class.java)) }
         val repairs = { startActivity(Intent(this, RepairsActivity::class.java)) }
+        val specs = { startActivity(Intent(this, PhoneSpecsActivity::class.java)) }
         b.iconBook.setOnClickListener { book() }
         b.navBook.setOnClickListener { book() }
         b.btnHeroBook.setOnClickListener { book() }
         b.iconRepairs.setOnClickListener { repairs() }
         b.navRepairs.setOnClickListener { repairs() }
         b.tvSeeAll.setOnClickListener { repairs() }
+        b.btnPhoneSpecs.setOnClickListener { specs() }
         b.iconCall.setOnClickListener { call() }
         b.btnCall.setOnClickListener { call() }
         b.btnWhatsapp.setOnClickListener { whatsapp() }
@@ -64,7 +65,7 @@ class DashboardActivity : AppCompatActivity() {
         b.btnMail.setOnClickListener { mail() }
         b.navAccount.setOnClickListener { confirmSignOut() }
         b.btnHeroTrack.setOnClickListener { heroId?.let { openRepair(it) } }
-        listOf(b.btnHeroBook, b.btnHeroTrack, b.btnCall, b.btnWhatsapp, b.btnMail, b.navHome, b.navBook, b.navRepairs, b.navAccount)
+        listOf(b.btnHeroBook, b.btnHeroTrack, b.btnCall, b.btnWhatsapp, b.btnMail, b.btnPhoneSpecs, b.navHome, b.navBook, b.navRepairs, b.navAccount)
             .forEach { it.pressEffect() }
     }
 
@@ -99,9 +100,9 @@ class DashboardActivity : AppCompatActivity() {
             val step = Stats.stepOf(active)
             b.tvHeroTicket.text = active.ticketId
             b.tvHeroDevice.text = "${active.deviceModel} • ${active.issueDescription}"
-            b.tvHeroStatus.text = active.statusEnum.label
-            b.heroProgress.setProgressCompat(step * 100 / 6, true)
-            b.tvHeroStep.text = "Step $step of 6 • ${active.techAssigned?.let { "Technician: $it" } ?: "Technician not assigned yet"}"
+            b.tvHeroStatus.text = active.statusEnum.label(this)
+            b.heroProgress.setProgressCompat(step * 100 / 7, true)
+            b.tvHeroStep.text = getString(R.string.step_indicator, step, active.techAssigned?.let { getString(R.string.tech_assigned, it) } ?: getString(R.string.tech_not_assigned))
         } else heroId = null
 
         b.recentList.removeAllViews()
@@ -109,8 +110,8 @@ class DashboardActivity : AppCompatActivity() {
             val row = ItemRepairBinding.inflate(layoutInflater, b.recentList, false)
             row.tvTicket.text = r.ticketId
             row.tvDevice.text = "${r.deviceModel} • ${r.issueDescription}"
-            row.tvStatus.text = r.statusEnum.label
-            row.tvTech.text = "Technician: ${r.techAssigned ?: "Unassigned"}"
+            row.tvStatus.text = r.statusEnum.label(this)
+            row.tvTech.text = r.techAssigned?.let { getString(R.string.tech_assigned, it) } ?: getString(R.string.unassigned)
             row.root.pressEffect()
             row.root.setOnClickListener { openRepair(r.id.ifBlank { r.ticketId }) }
             b.recentList.addView(row.root)
@@ -122,7 +123,7 @@ class DashboardActivity : AppCompatActivity() {
         EstimateService.ISSUES.forEach { issue ->
             val s = ItemServiceBinding.inflate(layoutInflater, b.servicesRow, false)
             s.tvServiceName.text = issue
-            s.tvServicePrice.text = "Est. from R${EstimateService.get("Smartphone", issue).min}"
+            s.tvServicePrice.text = getString(R.string.est_from, EstimateService.get("Smartphone", issue).min)
             s.ivService.setImageResource(serviceIcons[issue] ?: R.drawable.ic_build)
             s.root.pressEffect()
             s.root.setOnClickListener {

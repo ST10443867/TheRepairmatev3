@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-class BookRepairActivity : AppCompatActivity() {
+class BookRepairActivity : BaseActivity() {
 
     companion object { const val EXTRA_ISSUE = "issue" }
     private lateinit var b: ActivityBookBinding
@@ -37,7 +37,6 @@ class BookRepairActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityBookBinding.inflate(layoutInflater)
         setContentView(b.root)

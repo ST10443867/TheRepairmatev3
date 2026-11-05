@@ -1,5 +1,7 @@
 package com.example.therepairmate.data
 
+import android.content.Context
+import com.example.therepairmate.R
 
 data class AdminStats(
     val total: Int,
@@ -18,8 +20,8 @@ object Stats {
     fun isActive(r: Repair): Boolean =
         r.statusEnum != RepairStatus.COMPLETED && r.statusEnum != RepairStatus.CANCELLED
 
-    /** Current step on the 6-step roadmap: 1..6, completed = 6, cancelled = 0. */
-    fun stepOf(r: Repair): Int = minOf(r.statusEnum.roadmapIndex + 1, 6)
+    /** Current step on the roadmap: 1..7, completed = 7, cancelled = 0. */
+    fun stepOf(r: Repair): Int = minOf(r.statusEnum.roadmapIndex + 1, 7)
 
     fun compute(repairs: List<Repair>, technicians: List<String>): AdminStats {
         val active = repairs.filter { isActive(it) }
@@ -42,5 +44,11 @@ object Greeting {
         hour < 12 -> "Good morning"
         hour < 18 -> "Good afternoon"
         else -> "Good evening"
+    }
+
+    fun forHour(context: Context, hour: Int): String = when {
+        hour < 12 -> context.getString(R.string.greeting_morning)
+        hour < 18 -> context.getString(R.string.greeting_afternoon)
+        else -> context.getString(R.string.greeting_evening)
     }
 }

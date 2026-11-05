@@ -19,5 +19,6 @@
         <activity android:name=".ui.BookRepairActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.RepairsActivity" />
         <activity android:name=".ui.RepairDetailActivity" />
+        <activity android:name=".ui.PhoneSpecsActivity" />
     </application>
 </manifest>

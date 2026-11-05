@@ -1,19 +1,24 @@
 package com.example.therepairmate.data
 
+import android.content.Context
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.IgnoreExtraProperties
+import com.example.therepairmate.R
 
-enum class RepairStatus(val key: String, val label: String, val roadmapIndex: Int) {
-    BOOKING_CONFIRMED("booking_confirmed", "Booking confirmed", 0),
-    RECEIVED("received", "Received", 1),
-    DIAGNOSING("diagnosing", "Diagnosing", 2),
-    PARTS_ORDERED("parts_ordered", "Parts ordered", 3),
-    REPAIRING("repairing", "Repairing", 4),
-    TESTING("testing", "Testing", 5),
-    READY_FOR_PICKUP("ready_for_pickup", "Ready for pickup", 6),
-    COMPLETED("completed", "Completed", 7),
-    CANCELLED("cancelled", "Cancelled", -1);
+enum class RepairStatus(val key: String, val labelRes: Int, val roadmapIndex: Int) {
+    BOOKING_CONFIRMED("booking_confirmed", R.string.status_booking_confirmed, 0),
+    RECEIVED("received", R.string.status_received, 1),
+    DIAGNOSING("diagnosing", R.string.status_diagnosing, 2),
+    PARTS_ORDERED("parts_ordered", R.string.status_parts_ordered, 3),
+    REPAIRING("repairing", R.string.status_repairing, 4),
+    TESTING("testing", R.string.status_testing, 5),
+    READY_FOR_PICKUP("ready_for_pickup", R.string.status_ready_for_pickup, 6),
+    COMPLETED("completed", R.string.status_completed, 7),
+    CANCELLED("cancelled", R.string.status_cancelled, -1);
+
+    fun label(context: Context): String = context.getString(labelRes)
+    val label: String get() = key
 
     companion object {
         val roadmap: List<RepairStatus> = listOf(

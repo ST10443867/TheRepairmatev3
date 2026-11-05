@@ -1,8 +1,8 @@
-# Task List: Optional Device Photo Upload for Repair Booking
+# Task List: 50 Phone Fallback, Interactive Admin Dashboard/Charts, Filter/Sort Repairs & Admin Branding
 
 - [x] Create implementation plan and obtain approval
-- [x] Update `Repair` data model in `Models.kt` to include `imageUrl`
-- [x] Update `Repo.book` in `Repo.kt` to persist `imageUrl`
-- [x] Update `activity_book.xml` to add optional photo attachment button and thumbnail preview `ImageView`
-- [x] Update `BookRepairActivity.kt` with image picker launcher and passing `imageUrl` to booking
-- [x] Verify build and test functionality
+- [x] Expand offline mock data in `PhoneSpecsActivity.kt` to 50 popular phones
+- [x] Update `activity_admin.xml` with top-left QuickFix logo and background watermark
+- [x] Make Admin KPI cards, status bars, and tech workload bars interactive & clickable in `AdminDashboardActivity.kt`
+- [x] Add status filter and sort options to `activity_repairs.xml` and `RepairsActivity.kt`
+- [x] Build app and verify functionality

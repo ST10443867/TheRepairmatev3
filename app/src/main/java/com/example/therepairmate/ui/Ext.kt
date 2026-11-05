@@ -11,7 +11,6 @@ import android.view.animation.OvershootInterpolator
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
@@ -39,7 +38,7 @@ fun View.pressEffect() {
 fun AppCompatActivity.confirmSignOut() {
     val activity = this
     val options = arrayOf("Change Language", "Sign out")
-    AlertDialog.Builder(this)
+    com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
         .setTitle("Account (${Repo.email ?: "User"})")
         .setItems(options) { _, which ->
             when (which) {
@@ -69,7 +68,7 @@ fun AppCompatActivity.showLanguageDialog(activity: AppCompatActivity) {
     val currentTag = androidx.appcompat.app.AppCompatDelegate.getApplicationLocales().toLanguageTags()
     val currentIndex = tags.indexOfFirst { currentTag.startsWith(it) }.let { if (it < 0) 0 else it }
 
-    AlertDialog.Builder(activity)
+    com.google.android.material.dialog.MaterialAlertDialogBuilder(activity)
         .setTitle("Choose Language / Tlhopha Puo / Khetha Ulwimi")
         .setSingleChoiceItems(languages, currentIndex) { dialog, which ->
             val selectedLang = tags[which]
@@ -145,4 +144,25 @@ fun androidx.recyclerview.widget.RecyclerView.smoothScrollToTop() {
 /** Smooth scroll ScrollView to top */
 fun android.widget.ScrollView.smoothScrollToTop() {
     smoothScrollTo(0, 0)
+}
+
+fun android.widget.ImageView.loadUrl(url: String?) {
+    if (url.isNullOrBlank()) {
+        setImageResource(R.drawable.ic_phone)
+        return
+    }
+    setImageDrawable(null)
+    kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+        try {
+            val stream = java.net.URL(url).openStream()
+            val bmp = android.graphics.BitmapFactory.decodeStream(stream)
+            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                setImageBitmap(bmp)
+            }
+        } catch (e: Exception) {
+            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                setImageResource(R.drawable.ic_phone)
+            }
+        }
+    }
 }

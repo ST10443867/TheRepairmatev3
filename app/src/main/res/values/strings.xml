@@ -88,4 +88,38 @@
     <string name="all_assigned">All active repairs are assigned to technicians</string>
     <string name="manage_all_repairs">Manage all repairs</string>
 
+    <!-- Greetings & Dynamic UI -->
+    <string name="greeting_morning">Good morning</string>
+    <string name="greeting_afternoon">Good afternoon</string>
+    <string name="greeting_evening">Good evening</string>
+
+    <string name="status_booking_confirmed">Booking confirmed</string>
+    <string name="status_received">Received</string>
+    <string name="status_diagnosing">Diagnosing</string>
+    <string name="status_parts_ordered">Parts ordered</string>
+    <string name="status_repairing">Repairing</string>
+    <string name="status_testing">Testing</string>
+    <string name="status_ready_for_pickup">Ready for pickup</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
+
+    <string name="step_indicator">Step %d of 6 • %s</string>
+    <string name="tech_assigned">Technician: %s</string>
+    <string name="tech_not_assigned">Technician not assigned yet</string>
+    <string name="est_from">Est. from R%d</string>
+    <string name="estimated_format">Estimated: R%d – R%d • %s</string>
+    <string name="estimate_preliminary">Preliminary only. Final price is confirmed after diagnosis.</string>
+    <string name="closed_weekends">Closed on weekends. Pick a weekday.</string>
+    <string name="select_time">Select a time (greyed = unavailable)</string>
+    <string name="booked_success">Booked %s</string>
+    <string name="slot_taken">That slot was just taken. Please choose another.</string>
+    <string name="load_repairs_error">Could not load repairs: %s</string>
+    <string name="assign_title">Assign %s</string>
+    <string name="assigned_to">Assigned to %s</string>
+    <string name="admin_access_required">Admin access required</string>
+    <string name="language_updated">Language updated</string>
+    <string name="tap_to_assign">tap to assign</string>
+    <string name="appointment_format">Appointment: %s %s</string>
+    <string name="device_photo_desc">Customer uploaded device photo</string>
+
 </resources>

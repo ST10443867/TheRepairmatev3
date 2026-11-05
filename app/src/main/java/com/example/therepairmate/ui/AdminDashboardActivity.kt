@@ -1,12 +1,9 @@
 package com.example.therepairmate.ui
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,13 +18,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 import java.time.LocalTime
 
-class AdminDashboardActivity : AppCompatActivity() {
+class AdminDashboardActivity : BaseActivity() {
     private lateinit var b: ActivityAdminBinding
     private var repairs = listOf<Repair>()
     private var firstRender = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyLocalLanguage()
         super.onCreate(savedInstanceState)
         b = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(b.root)
@@ -35,20 +31,41 @@ class AdminDashboardActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java)); finish(); return
         }
 
-        b.tvAdminGreeting.text = Greeting.forHour(LocalTime.now().hour)
-        b.tvAdminName.setOnClickListener { b.root.smoothScrollToTop() }
-        b.tvAdminGreeting.setOnClickListener { b.root.smoothScrollToTop() }
+        b.tvAdminGreeting.text = Greeting.forHour(this, LocalTime.now().hour)
+        b.tvAdminName.setOnClickListener { b.scrollView.smoothScrollToTop() }
+        b.tvAdminGreeting.setOnClickListener { b.scrollView.smoothScrollToTop() }
         b.btnManage.pressEffect()
         b.btnManage.setOnClickListener {
             startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true))
         }
+        b.btnPhoneSpecs.pressEffect()
+        b.btnPhoneSpecs.setOnClickListener {
+            startActivity(Intent(this, PhoneSpecsActivity::class.java))
+        }
         b.iconLogout.setOnClickListener { confirmSignOut() }
+
+        b.cardActive.pressEffect()
+        b.cardActive.setOnClickListener {
+            startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true).putExtra("filter_type", "active"))
+        }
+        b.cardUnassigned.pressEffect()
+        b.cardUnassigned.setOnClickListener {
+            startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true).putExtra("filter_type", "unassigned"))
+        }
+        b.cardReady.pressEffect()
+        b.cardReady.setOnClickListener {
+            startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true).putExtra("filter_status", RepairStatus.READY_FOR_PICKUP.key))
+        }
+        b.cardCompleted.pressEffect()
+        b.cardCompleted.setOnClickListener {
+            startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true).putExtra("filter_status", RepairStatus.COMPLETED.key))
+        }
 
         lifecycleScope.launch {
             // Client-side check is for UX only; Firestore rules enforce admin access on the server.
             val p = try { withTimeout(10_000) { Repo.profile() } } catch (e: Exception) { null }
             if (p?.second != "admin") {
-                toast("Admin access required")
+                toast(getString(R.string.admin_access_required))
                 startActivity(Intent(this@AdminDashboardActivity, DashboardActivity::class.java))
                 finish()
                 return@launch
@@ -80,12 +97,18 @@ class AdminDashboardActivity : AppCompatActivity() {
 
         b.statusList.removeAllViews()
         RepairStatus.values().forEach { st ->
-            addBar(b.statusList, st.label, s.byStatus[st] ?: 0, s.total, statusColor(st))
+            addBar(b.statusList, st.label(this), s.byStatus[st] ?: 0, s.total, statusColor(st)) {
+                startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true).putExtra("filter_status", st.key))
+            }
         }
 
         b.techList.removeAllViews()
         val maxLoad = s.workload.values.maxOrNull() ?: 0
-        s.workload.forEach { (tech, n) -> addBar(b.techList, tech, n, maxLoad, R.color.qf_blue) }
+        s.workload.forEach { (tech, n) ->
+            addBar(b.techList, tech, n, maxLoad, R.color.qf_blue) {
+                startActivity(Intent(this, RepairsActivity::class.java).putExtra(RepairsActivity.EXTRA_ADMIN, true).putExtra("filter_tech", tech))
+            }
+        }
 
         b.unassignedList.removeAllViews()
         val pending = repairs.filter { Stats.isActive(it) && it.techAssigned.isNullOrBlank() }.take(5)
@@ -94,8 +117,8 @@ class AdminDashboardActivity : AppCompatActivity() {
             val row = ItemRepairBinding.inflate(layoutInflater, b.unassignedList, false)
             row.tvTicket.text = r.ticketId
             row.tvDevice.text = "${r.deviceModel} • ${r.issueDescription}"
-            row.tvStatus.text = "${r.statusEnum.label} · tap to assign"
-            row.tvTech.text = "Appointment: ${r.scheduledSlot.date} ${r.scheduledSlot.startTime}"
+            row.tvStatus.text = "${r.statusEnum.label(this)} · ${getString(R.string.tap_to_assign)}"
+            row.tvTech.text = getString(R.string.appointment_format, r.scheduledSlot.date, r.scheduledSlot.startTime)
             row.root.pressEffect()
             row.root.setOnClickListener { assign(r) }
             b.unassignedList.addView(row.root)
@@ -110,25 +133,29 @@ class AdminDashboardActivity : AppCompatActivity() {
         RepairStatus.CANCELLED -> R.color.qf_danger
     }
 
-    private fun addBar(parent: LinearLayout, label: String, count: Int, max: Int, colorRes: Int) {
+    private fun addBar(parent: LinearLayout, label: String, count: Int, max: Int, colorRes: Int, onClick: (() -> Unit)? = null) {
         val row = ItemBarBinding.inflate(layoutInflater, parent, false)
         row.tvBarLabel.text = label
         row.tvBarCount.text = count.toString()
         row.barIndicator.max = maxOf(max, 1)
         row.barIndicator.setIndicatorColor(ContextCompat.getColor(this, colorRes))
         row.barIndicator.setProgressCompat(count, false)
+        if (onClick != null) {
+            row.root.pressEffect()
+            row.root.setOnClickListener { onClick() }
+        }
         parent.addView(row.root)
     }
 
     private fun assign(r: Repair) {
         val active = repairs.filter { Stats.isActive(it) }
         val labels = Repo.TECHNICIANS.map { t -> "$t (${active.count { it.techAssigned == t }} active)" }
-        AlertDialog.Builder(this).setTitle("Assign ${r.ticketId}")
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this).setTitle(getString(R.string.assign_title, r.ticketId))
             .setItems(labels.toTypedArray()) { _, i ->
                 lifecycleScope.launch {
                     try {
                         withTimeout(10_000) { Repo.assignTech(r.id.ifBlank { r.ticketId }, Repo.TECHNICIANS[i]) }
-                        toast("Assigned to ${Repo.TECHNICIANS[i]}")
+                        toast(getString(R.string.assigned_to, Repo.TECHNICIANS[i]))
                     } catch (e: Exception) { toast(friendlyError(e)) }
                 }
             }.show()
