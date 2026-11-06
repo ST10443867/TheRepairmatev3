@@ -71,3 +71,15 @@ Our expert technical team consists of:
    - Add your `google-services.json` file to the `app/` directory.
 4. **Build & Run**:
    - Sync Gradle and click **Run 'app'** on an emulator or physical device.
+  
+   ## Our app pictures
+   <img width="720" height="1600" alt="Screenshot_20261106_170637_com example therepairmate" src="https://github.com/user-attachments/assets/d71d0ff1-b339-494c-8b9c-0dbb3c3cf05b" />
+<img width="720" height="1600" alt="Screenshot_20261106_170618_com example therepairmate" src="https://github.com/user-attachments/assets/c1c2d737-f2fc-40f6-a5f7-eab9082bfd6d" />
+<img width="720" height="1600" alt="Screenshot_20261106_170609_com example therepairmate" src="https://github.com/user-attachments/assets/cbf4a61a-265d-4306-ac3a-b1c258638847" />
+<img width="720" height="1600" alt="Screenshot_20261106_170559_com example therepairmate" src="https://github.com/user-attachments/assets/6dff12ce-d7ab-41a8-a5d3-fc314cf4b96e" />
+<img width="720" height="1600" alt="Screenshot_20261106_170903_com example therepairmate" src="https://github.com/user-attachments/assets/bf408070-40fb-41ba-b828-aca06ec4e14e" />
+<img width="720" height="1600" alt="Screenshot_20261106_170852_com example therepairmate" src="https://github.com/user-attachments/assets/93bf87ca-2e18-4660-9fcb-1af4e136fc1d" />
+<img width="720" height="1600" alt="Screenshot_20261106_170842_com example therepairmate" src="https://github.com/user-attachments/assets/02de1e61-d407-4614-a0f8-bded11d60285" />
+<img width="720" height="1600" alt="Screenshot_20261106_170835_com example therepairmate" src="https://github.com/user-attachments/assets/d92f3b6f-d41b-4437-bb64-b7571c42a239" />
+<img width="720" height="1600" alt="Screenshot_20261106_170647_com example therepairmate" src="https://github.com/user-attachments/assets/1f77a0dc-257b-477f-993d-9a8ed9c74350" />
+
